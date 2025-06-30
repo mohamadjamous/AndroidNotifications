@@ -63,6 +63,14 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         .bigLargeIcon(null as Bitmap?) // Specify null as Bitmap?
 
     // TODO: Step 2.2 add snooze action
+    val snoozeIntent = Intent(applicationContext, SnoozeReceiver::class.java)
+    val snoozePendingIntent : PendingIntent  = PendingIntent.getBroadcast(
+        applicationContext,
+        REQUEST_CODE,
+        snoozeIntent,
+        FLAGS
+    )
+
 
     // TODO: Step 1.2 get an instance of NotificationCompat.Builder
     // Build the notification
@@ -77,6 +85,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         )
         .setContentText(messageBody)
 
+
     // TODO: Step 1.8 use the new 'breakfast' notification channel
 
     // TODO: Step 1.3 set title, text and icon to builder
@@ -90,6 +99,11 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
     // TODO: Step 2.1 add style to builder
 
     // TODO: Step 2.3 add snooze action
+        .addAction(
+            R.drawable.egg_icon,
+            applicationContext.getString(R.string.snooze),
+            snoozePendingIntent
+        )
 
     // TODO: Step 2.5 set priority
 
